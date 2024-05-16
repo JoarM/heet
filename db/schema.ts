@@ -6,7 +6,9 @@ export const userTable = mysqlTable("user", {
     email: varchar("email", {  length: 255 }).notNull(),
     emailConfirmed: boolean("emailConfirmed").default(false),
     phoneNumber: varchar("phoneNumber", { length: 32 }),
-    country: varchar("country", { length: 128 })
+    country: varchar("country", { length: 128 }),
+    displayName: varchar("display_name", { length: 128 }).notNull(),
+    hashedPassword: varchar("hashed_password", { length: 255 }).notNull()
 })
 
 export const sessionTable = mysqlTable("session", {

@@ -14,6 +14,9 @@ export default function LoginForm() {
                 <Label className="mt-4 block" htmlFor="username">Användarnamn</Label>
                 <Input className="mt-2 h-9 w-full" id="username" name="username" />
 
+                <Label className="mt-4 block" htmlFor="displayname">Visningsnamn</Label>
+                <Input className="mt-2 h-9 w-full" id="displayname" name="displayname" />
+
 
                 <Label className="mt-4 block" htmlFor="mail">E-mailadress</Label>
                 <Input className="mt-2 h-9 w-full" id="mail" name="mail" />

@@ -8,6 +8,20 @@
       "when": 1715871522365,
       "tag": "0000_ambitious_wallow",
       "breakpoints": false
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1715894062470,
+      "tag": "0001_previous_mesmero",
+      "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1715895392806,
+      "tag": "0002_lazy_nextwave",
+      "breakpoints": false
     }
   ]
 }
