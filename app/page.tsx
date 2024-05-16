@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import {APIProvider, Map} from '@vis.gl/react-google-maps';
 import { Button } from '@/components/ui/button';
-import { ThemeSwapper } from '@/components/theme-swapper';
+import { LocateFixed } from 'lucide-react';
 
 interface Location {
   lng: number,
@@ -45,9 +45,10 @@ export default function Page() {
             setLocation({ lat: position?.coords.latitude ?? 0, lng: position?.coords.longitude ?? 0})
           });
         }}
-        ></Button>
+        >
+          <LocateFixed />
+        </Button>
       </div>
-    
   </APIProvider>
   )
 };
