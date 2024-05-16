@@ -34,8 +34,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="max-w-md w-full mx-auto border border-border shadow-xl rounded-2xl h-svh overflow-y-auto relative max-h-[840px]">
-              <main className="h-[min(calc(100svh-20px),820px)] bg-background">
+            <div className="max-w-md w-full mx-auto border border-border shadow-xl rounded-2xl h-svh relative max-h-[840px]">
+              <main className="h-[min(calc(100svh-20px),820px)] bg-background overflow-y-auto pb-10">
                 {children}
               </main>
               <nav className="bg-secondary rounded-t-md overflow-hidden absolute bottom-0 left-0 right-0 h-">
