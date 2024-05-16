@@ -42,7 +42,7 @@ export default function RootLayout({
                 <div className="flex items-center justify-evenly flex-wrap m-5">
                   <Link href={"/news"}><Newspaper className="size-7" /></Link>
                   <Link href={"/"}><MapPin className="size-7" /></Link>
-                  <Link href={""}><UserRound className="size-7"/></Link>
+                  <Link href={"/account"}><UserRound className="size-7"/></Link>
                 </div>
               </nav>
             </div>
