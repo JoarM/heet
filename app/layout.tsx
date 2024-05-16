@@ -31,8 +31,8 @@ export default function RootLayout({
             {children}
             <nav className="bg-background rounded-t-md overflow-hidden absolute bottom-0 left-0 right-0 h-">
               <div className="flex items-center justify-evenly flex-wrap m-5">
-                <Link href={""}><Newspaper className="size-7" /></Link>
-                <Link href={""}><MapPin className="size-7" /></Link>
+                <Link href={"/news"}><Newspaper className="size-7" /></Link>
+                <Link href={"/"}><MapPin className="size-7" /></Link>
                 <Link href={""}><UserRound className="size-7"/></Link>
               </div>
             </nav>
