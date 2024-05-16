@@ -27,7 +27,7 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}>
-          <div className="max-w-md min-h-screen mx-auto border border-border shadow-xl rounded-2xl max-h-svh overflow-y-scroll">
+          <div className="max-w-md min-h-screen mx-auto border border-border shadow-xl rounded-2xl max-h-svh overflow-y-auto">
             {children}
             <nav className="m-4 bg-background">
               <div className="mx-auto max-w-60 flex flex-wrap justify-between">

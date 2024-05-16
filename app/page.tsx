@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import {APIProvider, Map} from '@vis.gl/react-google-maps';
+import { Button } from '@/components/ui/button';
 
 interface Location {
   lng: number,
@@ -20,17 +21,20 @@ export default function Page() {
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
-    <Map
-      style={{width: '100%', height: '100svh'}}
-      defaultCenter={{lat: 0, lng: 0}}
-      center={location}
-      defaultZoom={18}
-      gestureHandling={'greedy'}
-      disableDefaultUI={true}
-      onCenterChanged={(e) => {
-        setLocation({lat: e.detail.center.lat, lng: e.detail.center.lng})
-      }}
-    />
+      <div className=' h-[calc(100svh-80px)]'>
+        <Map
+          style={{width: '100%', height: '100%'}}
+          defaultCenter={{lat: 0, lng: 0}}
+          center={location}
+          defaultZoom={18}
+          gestureHandling={'greedy'}
+          disableDefaultUI={true}
+          onCenterChanged={(e) => {
+            setLocation({lat: e.detail.center.lat, lng: e.detail.center.lng})
+          }}
+        />
+      </div>
+    
   </APIProvider>
   )
 };
