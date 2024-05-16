@@ -17,8 +17,9 @@ export default function LoginForm() {
                 <Label className="mt-4 block" htmlFor="password">Lösenord</Label>
                 <Input className="mt-2 w-full h-9" type="password" id="password" name="password" />
                 {/* {form?.error?.password && <span className="text-sm font-medium text-destructive mt-2 block">{form.error.password}</span>} */}
-                
+                <Link href={"/"}>
                 <LoadingButton className="mt-6 w-full h-9">Logga in</LoadingButton>
+                </Link>
 
                 {/* {form?.message && <span className="text-sm font-medium text-destructive mt-2 block">{form.message}</span>} */}
 
