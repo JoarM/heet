@@ -19,6 +19,12 @@ export default async function AccountPage() {
 
                 <Label className="text-xl w-max inline">Telefonnummer</Label>
                 <header className="w-full mb-8">+46 72-505 05 31</header>
+
+                <Label className="text-xl w-max inline">E-mailadress</Label>
+                <header className="w-full mb-8">feluxfelixus@gmail.com</header>
+
+                <Label className="text-xl w-max inline">Land</Label>
+                <header className="w-full mb-8">Sverige</header>
                 
             </div>
         </div>
