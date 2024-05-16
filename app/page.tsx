@@ -16,7 +16,7 @@ export default function Page() {
       console.log(position)
       setLocation({lat: position?.coords.latitude ?? 0, lng: position?.coords.longitude ?? 0})
     });
-  })
+  }, [])
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
