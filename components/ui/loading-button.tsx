@@ -2,6 +2,7 @@
 
 import { useFormStatus } from "react-dom";
 import { Button, ButtonProps } from "./button";
+import { Loader2 } from "lucide-react";
 
 interface LoadingButtonProps extends ButtonProps {
     loading: boolean
@@ -19,8 +20,14 @@ export function LoadingButton({
         <Button
         disabled={loading || pending}
         className={className}
+        {...props}
         >
-            
+            {loading || pending && (
+                <Loader2 
+                className="mr-2 size-4 animate-spin"
+                />
+            )}
+            {children}
         </Button>
     )
 }
