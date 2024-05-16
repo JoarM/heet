@@ -5,7 +5,7 @@ import { MapPin, Newspaper, UserRound } from "lucide-react";
 
 import { cn } from "@/lib/utils"
 import Link from "next/link";
-import { APIProvider } from "@vis.gl/react-google-maps";
+import { ThemeProvider } from "@/components/theme-provider";
  
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -24,20 +24,32 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        
+      </head>
       <body className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen font-sans antialiased grid place-items-center bg-secondary",
           fontSans.variable
         )}>
-          <div className="max-w-md min-h-screen mx-auto border border-border shadow-xl rounded-2xl max-h-svh overflow-y-auto">
-            {children}
-            <nav className="m-4 bg-background">
-              <div className="mx-auto max-w-60 flex flex-wrap justify-between">
-                <Link href={""}><Newspaper className="size-5" /></Link>
-                <Link href={""}><MapPin className="size-5" /></Link>
-                <Link href={""}><UserRound/></Link>
-              </div>
-            </nav>
-          </div>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="max-w-md w-full mx-auto border border-border shadow-xl rounded-2xl h-svh relative max-h-[840px] overflow-clip">
+              <main className="h-[min(calc(100svh-20px),820px)] bg-background overflow-y-auto pb-10">
+                {children}
+              </main>
+              <nav className="bg-secondary rounded-t-md overflow-hidden absolute bottom-0 left-0 right-0 h-">
+                <div className="flex items-center justify-evenly flex-wrap m-5">
+                  <Link href={"/news"}><Newspaper className="size-7" /></Link>
+                  <Link href={"/"}><MapPin className="size-7" /></Link>
+                  <Link href={"/account"}><UserRound className="size-7"/></Link>
+                </div>
+              </nav>
+            </div>
+          </ThemeProvider>
         </body>
     </html>
   );

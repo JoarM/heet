@@ -21,7 +21,7 @@ export const sessionTable = mysqlTable("session", {
 	expiresAt: datetime("expires_at").notNull()
 })
 
-export const twoFactorKey = mysqlTable("session", {
+export const twoFactorKeyTable = mysqlTable("session", {
 	id: varchar("id", {
 		length: 255
 	}).primaryKey(),
@@ -33,7 +33,7 @@ export const twoFactorKey = mysqlTable("session", {
 	expiresAt: datetime("expires_at").notNull()
 })
 
-export const review = mysqlTable("review", {
+export const reviewTable = mysqlTable("review", {
     publisherId: varchar("publisher_id", {
 		length: 255
 	})
@@ -49,15 +49,15 @@ export const review = mysqlTable("review", {
     .references(() => userTable.id)
 })
 
-export const event = mysqlTable("event", {
+export const eventTable = mysqlTable("event", {
     id: int("id").notNull().autoincrement().primaryKey(),
     host_id: varchar("host_id", {
 		length: 255
 	})
     .notNull()
     .references(() => userTable.id),
-    longitude: float("longitude"),
-    latitude: float("latitude"),
+    longitude: float("longitude").notNull(),
+    latitude: float("latitude").notNull(),
     title: varchar("title", { length: 128 }),
     description: varchar("description", { length: 512 }),
     activity: varchar("activity", { length: 64 }),

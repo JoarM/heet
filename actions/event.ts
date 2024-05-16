@@ -1,0 +1,81 @@
+"use server"
+
+import { db } from "@/db"
+import { eventTable } from "@/db/schema"
+import { newEventValidator } from "@/lib/validations"
+import { eq, inArray } from "drizzle-orm"
+
+export async function createEvent(_: any, formData: FormData) {
+    const title = formData.get("title")
+    const description = formData.get("description")
+    const activity = formData.get("activity")
+    const from = new Date(formData.get("from")?.toString() ?? "")
+    const to = new Date(formData.get("to")?.toString() ?? "")
+    const lat = Number(formData.get("lat")?.toString() ?? "")
+    const lng = Number(formData.get("lng")?.toString() ?? "")
+
+    //Add authentication
+
+    const parse = await newEventValidator.safeParseAsync({
+        title: title,
+        description: description,
+        activity: activity,
+        from: from,
+        to: to,
+        lat: lat,
+        lng: lng
+    })
+
+    if (!parse.success) {
+        const error = parse.error.flatten().fieldErrors
+        return {
+            error
+        }
+    }
+
+    try {
+        await db.insert(eventTable)
+        .values({
+            title: parse.data.title,
+            description: parse.data.description,
+            activity: parse.data.activity,
+            from: parse.data.from,
+            to: parse.data.to,
+            //Add proper userid
+            host_id: "1",
+            latitude: lat,
+            longitude: lng
+        })
+    } catch (err: any) {
+        return {
+            error: {
+                message: "Ett oväntat fel uppstod"
+            }
+        }
+    }
+}
+
+export async function deleteEvent(id: number) {
+    try {
+        await db.delete(eventTable).where(eq(eventTable.id, id))
+    } catch (err: any) {
+        return {
+            error: {
+                message: "Ett oväntat fel uppstod"
+            }
+        }
+    }
+}
+
+export async function getEvents(filters?: {
+    activity?: string[],
+}) {
+    try {
+        const events = await db.select().from(eventTable).where(filters?.activity && inArray(eventTable.activity, filters.activity))
+        return events
+    } catch (err: any) {
+        return {
+            error: "Myslyckades med att ladda event"
+        }
+    }
+}

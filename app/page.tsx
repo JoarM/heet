@@ -22,6 +22,7 @@ import { profile } from 'console';
 import { CenterButton } from '@/components/center-button';
 import { Calendar } from '@/components/ui/calendar';
 import { Textarea } from '@/components/ui/textarea';
+import { ThemeSwapper } from '@/components/theme-swapper';
 
 interface Location {
   lng: number,
@@ -33,7 +34,6 @@ export default function Page() {
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
-      <div className=' h-[calc(100svh-80px)] relative'>
         <Map
           id='map'
           style={{width: '100%', height: '100%'}}
