@@ -14,10 +14,10 @@ export default async function AccountPage() {
                 </div>
                 <Separator className="my-4"/>
                 <div className="my-3">
-                    <Link href="/account/settings" className="block text-xl"><Settings className="inline m-2"/>Konto Inställningar</Link>
-                    <Link href="/account/privacy" className="block text-xl"><Cookie className="inline m-2"/>Integritets Inställningar</Link>
-                    <Link href="" className="block text-xl"><LockKeyhole className="inline m-2"/>Konto Säkerhet</Link>
-                    <Link href="" className="block text-xl"><PartyPopper className="inline m-2"/>Mina Event</Link>
+                    <Link href="/account/settings" className="block text-xl hover:underline underline-offset-4"><Settings className="inline m-2"/>Kontoinställningar</Link>
+                    <Link href="/account/privacy" className="block text-xl hover:underline underline-offset-4"><Cookie className="inline m-2"/>Integritetsinställningar</Link>
+                    <Link href="" className="block text-xl hover:underline underline-offset-4"><LockKeyhole className="inline m-2"/>Kontots Säkerhet</Link>
+                    <Link href="" className="block text-xl hover:underline underline-offset-4"><PartyPopper className="inline m-2"/>Mina Event</Link>
                 </div>
                 <Separator className="my-4"/>
                 <div className="flex">
