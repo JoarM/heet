@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import {APIProvider, Map} from '@vis.gl/react-google-maps';
 import { Button } from '@/components/ui/button';
+import { ThemeSwapper } from '@/components/theme-swapper';
 
 interface Location {
   lng: number,
