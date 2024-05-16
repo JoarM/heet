@@ -1,9 +1,28 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import {APIProvider, Map} from '@vis.gl/react-google-maps';
+import { Label } from "@/components/ui/label"
+import { TimePicker } from "@/components/ui/time-picker";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { AdvancedMarker, APIProvider, InfoWindow, Map, Marker, Pin, useMap} from '@vis.gl/react-google-maps';
 import { Button } from '@/components/ui/button';
-import { LocateFixed } from 'lucide-react';
+import { Utensils, Beer, Music, Dumbbell, Fish, Drama, Clapperboard, Dices, Plus, Clock, MapPin } from 'lucide-react';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
+import { profile } from 'console';
+import { CenterButton } from '@/components/center-button';
+import { Calendar } from '@/components/ui/calendar';
+import { Textarea } from '@/components/ui/textarea';
+import { ThemeSwapper } from '@/components/theme-swapper';
 
 interface Location {
   lng: number,
@@ -11,24 +30,15 @@ interface Location {
 }
 
 export default function Page() {
-  const [location, setLocation] = useState<Location | null>(null)
-  const [zoom, setZoom] = useState(18)
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLocation({lat: position?.coords.latitude ?? 0, lng: position?.coords.longitude ?? 0})
-    });
-  }, [])
+  const [date, setDate] = useState(new Date());
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
-      <div className=' h-[min(calc(100svh-20px),820px)]'>
         <Map
+          id='map'
           style={{width: '100%', height: '100%'}}
           defaultCenter={{lat: 0, lng: 0}}
-          center={location}
-          zoom={zoom}
-          onZoomChanged={(e) => setZoom(e.detail.zoom)}
+          defaultZoom={18}
           gestureHandling={'greedy'}
           disableDefaultUI={true}
           onCenterChanged={(e) => {
@@ -45,9 +55,7 @@ export default function Page() {
             setLocation({ lat: position?.coords.latitude ?? 0, lng: position?.coords.longitude ?? 0})
           });
         }}
-        >
-          <LocateFixed />
-        </Button>
+        ></Button>
       </div>
   </APIProvider>
   )

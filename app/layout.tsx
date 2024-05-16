@@ -24,8 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        
+      </head>
       <body className={cn(
-          "min-h-screen bg-background font-sans antialiased grid place-items-center",
+          "min-h-screen font-sans antialiased grid place-items-center bg-secondary",
           fontSans.variable
         )}>
           <ThemeProvider
@@ -34,13 +37,15 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="max-w-md w-full mx-auto border border-border shadow-xl rounded-2xl h-svh overflow-y-auto relative max-h-[840px]">
-              {children}
-              <nav className="bg-background rounded-t-md overflow-hidden absolute bottom-0 left-0 right-0 h-">
+            <div className="max-w-md w-full mx-auto border border-border shadow-xl rounded-2xl h-svh relative max-h-[840px] overflow-clip">
+              <main className="h-[min(calc(100svh-20px),820px)] bg-background overflow-y-auto pb-10">
+                {children}
+              </main>
+              <nav className="bg-secondary rounded-t-md overflow-hidden absolute bottom-0 left-0 right-0 h-">
                 <div className="flex items-center justify-evenly flex-wrap m-5">
                   <Link href={"/news"}><Newspaper className="size-7" /></Link>
                   <Link href={"/"}><MapPin className="size-7" /></Link>
-                  <Link href={""}><UserRound className="size-7"/></Link>
+                  <Link href={"/account"}><UserRound className="size-7"/></Link>
                 </div>
               </nav>
             </div>
