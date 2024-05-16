@@ -1,6 +1,66 @@
-import { mysqlTable, varchar } from "drizzle-orm/mysql-core";
+import { boolean, datetime, float, int, mysqlTable, smallint, varchar } from "drizzle-orm/mysql-core";
 
 export const userTable = mysqlTable("user", {
     id: varchar("id", { length: 255 }).unique().notNull().primaryKey(),
-    username: varchar("username", { length: 128 }).unique()
+    username: varchar("username", { length: 128 }).unique(),
+    email: varchar("email", {  length: 255 }).notNull(),
+    emailConfirmed: boolean("emailConfirmed").default(false),
+    phoneNumber: varchar("phoneNumber", { length: 32 }),
+    country: varchar("country", { length: 128 })
+})
+
+export const sessionTable = mysqlTable("session", {
+	id: varchar("id", {
+		length: 255
+	}).primaryKey(),
+	userId: varchar("user_id", {
+		length: 255
+	})
+		.notNull()
+		.references(() => userTable.id),
+	expiresAt: datetime("expires_at").notNull()
+})
+
+export const twoFactorKey = mysqlTable("session", {
+	id: varchar("id", {
+		length: 255
+	}).primaryKey(),
+	userId: varchar("user_id", {
+		length: 255
+	})
+    .notNull()
+    .references(() => userTable.id),
+	expiresAt: datetime("expires_at").notNull()
+})
+
+export const review = mysqlTable("review", {
+    publisherId: varchar("publisher_id", {
+		length: 255
+	})
+    .notNull()
+    .references(() => userTable.id),
+    title: varchar("title", { length: 128 }),
+    body: varchar("body", { length: 512 }),
+    rating: smallint("rating"),
+    host_id: varchar("host_id", {
+		length: 255
+	})
+    .notNull()
+    .references(() => userTable.id)
+})
+
+export const event = mysqlTable("event", {
+    id: int("id").notNull().autoincrement().primaryKey(),
+    host_id: varchar("host_id", {
+		length: 255
+	})
+    .notNull()
+    .references(() => userTable.id),
+    longitude: float("longitude"),
+    latitude: float("latitude"),
+    title: varchar("title", { length: 128 }),
+    description: varchar("description", { length: 512 }),
+    activity: varchar("activity", { length: 64 }),
+    from: datetime("from", { mode: "date" }),
+    to: datetime("to", { mode: "date" }),
 })
