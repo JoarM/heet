@@ -24,6 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        
+      </head>
       <body className={cn(
           "min-h-screen font-sans antialiased grid place-items-center bg-secondary",
           fontSans.variable
