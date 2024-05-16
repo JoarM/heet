@@ -22,7 +22,6 @@ export default function Page() {
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
-      <div className=' h-[min(calc(100svh-20px),820px)]'>
         <Map
           style={{width: '100%', height: '100%'}}
           defaultCenter={{lat: 0, lng: 0}}
@@ -45,9 +44,7 @@ export default function Page() {
             setLocation({ lat: position?.coords.latitude ?? 0, lng: position?.coords.longitude ?? 0})
           });
         }}
-        ></Button>
-      </div>
-    
+        ></Button>    
   </APIProvider>
   )
 };
