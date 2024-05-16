@@ -23,6 +23,7 @@ export default function LoginForm() {
                 {/* {form?.message && <span className="text-sm font-medium text-destructive mt-2 block">{form.message}</span>} */}
 
                 <Link href="/reset-password" className="font-medium mt-3 text-sm text-primary underline-offset-4 hover:underline block">Glömt lösenord?</Link>
+                <Link href="/register" className="font-medium mt-3 text-sm text-primary underline-offset-4 hover:underline block">Skapa konto</Link>
             </div>
         </form>
     )
