@@ -12,19 +12,19 @@ export default async function AccountPage() {
                 </header>
             <div className="mt-8">
                 <Label className="text-xl w-max inline font-bold">Användarnamn</Label>
-                <header className="w-full mb-8">@feluxfelixus</header>
+                <header className="w-full mb-8 text-muted-foreground">@feluxfelixus</header>
 
                 <Label className="text-xl w-max inline font-bold">Visningsnamn</Label>
-                <header className="w-full mb-8">Felix Johansson</header>
+                <header className="w-full mb-8 text-muted-foreground">Felix Johansson</header>
 
                 <Label className="text-xl w-max inline font-bold">Telefonnummer</Label>
-                <header className="w-full mb-8">+46 72-505 05 31</header>
+                <header className="w-full mb-8 text-muted-foreground">+46 72-505 05 31</header>
 
                 <Label className="text-xl w-max inline font-bold">E-mailadress</Label>
-                <header className="w-full mb-8">feluxfelixus@gmail.com</header>
+                <header className="w-full mb-8 text-muted-foreground">feluxfelixus@gmail.com</header>
 
                 <Label className="text-xl w-max inline font-bold">Land</Label>
-                <header className="w-full mb-8">Sverige</header>
+                <header className="w-full mb-8 text-muted-foreground">Sverige</header>
                 
             </div>
         </div>
