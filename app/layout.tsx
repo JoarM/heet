@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google"
 import "./globals.css";
+import { MapPin, Newspaper, UserRound } from "lucide-react";
 
 import { cn } from "@/lib/utils"
+import Link from "next/link";
  
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -24,7 +26,18 @@ export default function RootLayout({
       <body className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
-        )}>{children}</body>
+        )}>
+          <div className="max-w-md min-h-screen mx-auto border border-border shadow-xl rounded-2xl max-h-svh overflow-y-scroll">
+            {children}
+            <nav className="m-4 bg-background">
+              <div className="mx-auto max-w-60 flex flex-wrap justify-between">
+                <Link href={""}><Newspaper className="size-5" /></Link>
+                <Link href={""}><MapPin className="size-5" /></Link>
+                <Link href={""}><UserRound/></Link>
+              </div>
+            </nav>
+          </div>
+        </body>
     </html>
   );
 }
