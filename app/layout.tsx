@@ -27,13 +27,13 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}>
-          <div className="max-w-md min-h-screen mx-auto border border-border shadow-xl rounded-2xl max-h-svh overflow-y-auto">
+          <div className="max-w-md min-h-screen mx-auto border border-border shadow-xl rounded-2xl max-h-svh overflow-y-auto relative">
             {children}
-            <nav className="m-4 bg-background">
-              <div className="mx-auto max-w-60 flex flex-wrap justify-between">
-                <Link href={""}><Newspaper className="size-5" /></Link>
-                <Link href={""}><MapPin className="size-5" /></Link>
-                <Link href={""}><UserRound/></Link>
+            <nav className="bg-background rounded-t-md overflow-hidden absolute bottom-0 left-0 right-0 h-">
+              <div className="flex items-center justify-evenly flex-wrap m-5">
+                <Link href={""}><Newspaper className="size-7" /></Link>
+                <Link href={""}><MapPin className="size-7" /></Link>
+                <Link href={""}><UserRound className="size-7"/></Link>
               </div>
             </nav>
           </div>
