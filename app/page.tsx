@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import {APIProvider, Map} from '@vis.gl/react-google-maps';
 import { Button } from '@/components/ui/button';
+import { ThemeSwapper } from '@/components/theme-swapper';
 
 interface Location {
   lng: number,
@@ -21,7 +22,7 @@ export default function Page() {
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
-      <div className=' h-[calc(100svh-20px)]'>
+      <div className=' h-[min(calc(100svh-20px),820px)]'>
         <Map
           style={{width: '100%', height: '100%'}}
           defaultCenter={{lat: 0, lng: 0}}
