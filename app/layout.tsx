@@ -5,6 +5,7 @@ import { MapPin, Newspaper, UserRound } from "lucide-react";
 
 import { cn } from "@/lib/utils"
 import Link from "next/link";
+import { APIProvider } from "@vis.gl/react-google-maps";
  
 const fontSans = FontSans({
   subsets: ["latin"],
