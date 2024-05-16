@@ -5,7 +5,7 @@ import { Button, ButtonProps } from "./button";
 import { Loader2 } from "lucide-react";
 
 interface LoadingButtonProps extends ButtonProps {
-    loading: boolean
+    loading?: boolean
 }
 
 export function LoadingButton({
