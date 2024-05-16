@@ -11,19 +11,19 @@ export default async function AccountPage() {
                 Konto</Link> {">"} Kontoinställningar
                 </header>
             <div className="mt-8">
-                <Label className="text-xl w-max inline">Användarnamn</Label>
+                <Label className="text-xl w-max inline font-bold">Användarnamn</Label>
                 <header className="w-full mb-8">@feluxfelixus</header>
 
-                <Label className="text-xl w-max inline">Visningsnamn</Label>
+                <Label className="text-xl w-max inline font-bold">Visningsnamn</Label>
                 <header className="w-full mb-8">Felix Johansson</header>
 
-                <Label className="text-xl w-max inline">Telefonnummer</Label>
+                <Label className="text-xl w-max inline font-bold">Telefonnummer</Label>
                 <header className="w-full mb-8">+46 72-505 05 31</header>
 
-                <Label className="text-xl w-max inline">E-mailadress</Label>
+                <Label className="text-xl w-max inline font-bold">E-mailadress</Label>
                 <header className="w-full mb-8">feluxfelixus@gmail.com</header>
 
-                <Label className="text-xl w-max inline">Land</Label>
+                <Label className="text-xl w-max inline font-bold">Land</Label>
                 <header className="w-full mb-8">Sverige</header>
                 
             </div>
