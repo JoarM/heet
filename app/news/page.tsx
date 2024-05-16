@@ -17,17 +17,31 @@ export default async function NewsPage() {
             <div>
                 <h1>Filter</h1>
             </div>
-            <Card className="">
-                <CardContent className="p-6">
-                    <div className="flex gap-12">
-                        <img className="ml-2" src="" alt="PING"></img>
-                        <h2>UtFörsäljning</h2>
-                    </div>
-                    <div className="ml-24">
-                        <h1>2024</h1>
-                    </div>
-                </CardContent>
-            </Card>
+            <div> 
+                <h1>Aktiva Event</h1>
+                <Card className="bg-secondary drop-shadow-[0_4px_4px_rgba(33,196,88,1)]">
+                    <CardContent className="p-6 text-secondary-foreground">
+                        <div className="flex gap-12">
+                            <img className="ml-2" src="" alt="PING"></img>
+                            <h2>UtFörsäljning</h2>
+                        </div>
+                        <div className="ml-24">
+                            <h1>2024</h1>
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card className="bg-secondary mt-5">
+                    <CardContent className="p-6 text-secondary-foreground">
+                        <div className="flex gap-12">
+                            <img className="ml-2" src="" alt="PING"></img>
+                            <h2>UtFörsäljning</h2>
+                        </div>
+                        <div className="ml-24">
+                            <h1>2024</h1>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
     )
 }
