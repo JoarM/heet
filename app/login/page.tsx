@@ -7,7 +7,7 @@ import { LoadingButton } from "@/components/ui/loading-button";
 
 export default function LoginForm() {
     return (
-        <form className="mx-auto sm:px-4 px-4 rounded-2xl  max-w-lg mt-3">
+        <form className="mx-auto sm:px-4 px-4 rounded-2xl  max-w-lg pt-3">
             <h1 className="font-bold text-2xl mb-20">Inloggning</h1>
             <div className="my-auto">
                 <Label className="mt-4 block" htmlFor="mail">Användarnamn</Label>

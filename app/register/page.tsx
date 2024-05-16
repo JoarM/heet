@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 export default function LoginForm() {
     return (
-        <form className="mx-auto sm:px-4 px-4 rounded-2xl  max-w-lg mt-3">
+        <form className="mx-auto sm:px-4 px-4 rounded-2xl max-w-lg pt-3">
             <h1 className="font-bold text-2xl mb-20">Registrering</h1>
             <div className="my-auto">
                 <Label className="mt-4 block" htmlFor="username">Användarnamn</Label>
