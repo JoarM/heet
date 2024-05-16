@@ -23,7 +23,7 @@ export default async function NewsPage() {
                     <CardContent className="p-6 text-secondary-foreground">
                         <div className="flex gap-12">
                             <img className="ml-2" src="" alt="PING"></img>
-                            <h2>UtFörsäljning</h2>
+                            <h2>GinaTricot Utförsäljning</h2>
                         </div>
                         <div className="ml-24">
                             <h1>2024</h1>
@@ -34,7 +34,7 @@ export default async function NewsPage() {
                     <CardContent className="p-6 text-secondary-foreground">
                         <div className="flex gap-12">
                             <img className="ml-2" src="" alt="PING"></img>
-                            <h2>UtFörsäljning</h2>
+                            <h2>Eton Supersale</h2>
                         </div>
                         <div className="ml-24">
                             <h1>2024</h1>
