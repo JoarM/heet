@@ -34,7 +34,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="max-w-md w-full mx-auto border border-border shadow-xl rounded-2xl h-svh overflow-y-auto relative max-h-[840px]">
+            <div className="max-w-md w-full mx-auto border border-border shadow-xl rounded-2xl h-svh overflow-y-auto relative max-h-[840px] overflow-clip">
               <main className="h-[min(calc(100svh-20px),820px)] bg-background">
                 {children}
               </main>
@@ -42,7 +42,7 @@ export default function RootLayout({
                 <div className="flex items-center justify-evenly flex-wrap m-5">
                   <Link href={"/news"}><Newspaper className="size-7" /></Link>
                   <Link href={"/"}><MapPin className="size-7" /></Link>
-                  <Link href={"/account"}><UserRound className="size-7"/></Link>
+                  <Link href={"/login"}><UserRound className="size-7"/></Link>
                 </div>
               </nav>
             </div>
