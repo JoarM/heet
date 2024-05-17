@@ -3,6 +3,7 @@
 import { AdvancedMarker, Pin } from "@vis.gl/react-google-maps"
 import { Beer, Clapperboard, Dices, Drama, Dumbbell, Fish, Music, Utensils } from "lucide-react"
 import { Drawer, DrawerTrigger, DrawerContent, DrawerTitle, DrawerDescription } from "./ui/drawer"
+import { Button } from "./ui/button"
 
 export function CustomPin({
     lat,
@@ -82,6 +83,7 @@ export function CustomPin({
                     </div>
 
                     <DrawerDescription className="p-4 mb-2 border border-border w-max max-w-full rounded-xl">{description}</DrawerDescription>
+                    <Button className="w-full">Navigate</Button>
                 </div>
             </DrawerContent>
         </Drawer>
