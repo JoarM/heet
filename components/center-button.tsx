@@ -2,6 +2,7 @@ import { useMap } from "@vis.gl/react-google-maps";
 import { Button, ButtonProps } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useEffect } from "react";
+import { LocateFixed } from "lucide-react";
 
 export function CenterButton({
     className,
@@ -33,6 +34,8 @@ export function CenterButton({
           }
         }}
         {...props}
-        ></Button>
+        >
+          <LocateFixed className="size-5 text-secondary-foreground" />
+        </Button>
     )
 }
