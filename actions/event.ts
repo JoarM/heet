@@ -72,7 +72,9 @@ export async function getEvents(filters?: {
 }) {
     try {
         const events = await db.select().from(eventTable).where(filters?.activity && inArray(eventTable.activity, filters.activity))
-        return events
+        return {
+            data: events
+        }
     } catch (err: any) {
         return {
             error: "Myslyckades med att ladda event"
