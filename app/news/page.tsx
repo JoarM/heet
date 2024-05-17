@@ -54,22 +54,22 @@ export default function NewsPage() {
                         initial={{ height: 0 }}
                         animate={{ height: isDropdownOpen ? 'auto' : 0 }}
                         transition={{ duration: 0.3, delay: isDropdownOpen ? 0.3 : 0 }}
-                        className=" bg-white shadow-lg rounded-lg py-2 w-full"
+                        className=" bg-secondary shadow-lg rounded-lg py-2 w-full"
                     >
                         <div className="px-4 py-2">
-                            <div className="flex space-x-4 mb-2 text-sm text-gray-700">
-                                <label className="inline-flex items-center">
+                            <div className="flex space-x-4 mb-2 text-sm ">
+                                <label className="inline-flex items-center transition-colors hover:bg-background/50">
                                     Option A <input type="checkbox" className="mr-1"/>
                                 </label>
-                                <label className="inline-flex items-center">
+                                <label className="inline-flex items-center transition-colors hover:bg-background/50">
                                     <input type="checkbox" className="mr-1" /> Option B
                                 </label>
-                                <label className="inline-flex items-center">
+                                <label className="inline-flex items-center transition-colors hover:bg-background/50">
                                     <input type="checkbox" className="mr-1" /> Option C
                                 </label>
                             </div>
-                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 2</a>
-                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 3</a>
+                            <a href="#" className="block px-4 py-2 text-sm transition-colors hover:bg-background/50">Option 2</a>
+                            <a href="#" className="block px-4 py-2 text-sm transition-colors hover:bg-background/50">Option 3</a>
                         </div>
                     </motion.div>
                 </motion.div>
