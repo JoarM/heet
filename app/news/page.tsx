@@ -1,13 +1,13 @@
 "use client"
 
 import { cn } from "@/lib/utils";
-import "../globals.css";
 import { Inter as FontSans } from "next/font/google";
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { NewsCard } from "@/components/news-card";
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -77,39 +77,24 @@ export default function NewsPage() {
             </div>
             <div> 
                 <h1>Aktiva Event</h1>
-                <Card className="bg-secondary drop-shadow-[0_4px_4px_rgba(33,196,88,1)] grid grid-rows-[0fr] transition-all overflow-hidden duration-300 data-[open='true']:grid-rows-[1fr]">
-                    <CardContent className="p-6 text-secondary-foreground">
-                        <div className="flex gap-12">
-                            <img className="ml-2" src="" alt="PING"></img>
-                            <h2>GinaTricot Utförsäljning</h2>
-                        </div>
-                        <div className="ml-24">
-                            <h1>2024</h1>
-                        </div>
-                    </CardContent>
-                </Card>
-                <Card className="bg-secondary mt-5">
-                    <CardContent className="p-6 text-secondary-foreground">
-                        <div className="flex gap-12">
-                            <img className="ml-2" src="" alt="PING"></img>
-                            <h2>Eton Supersale</h2>
-                        </div>
-                        <div className="ml-24">
-                            <h1>2024</h1>
-                        </div>
-                    </CardContent>
-                </Card>
-                <Card className="bg-secondary mt-5">
-                    <CardContent className="p-6 text-secondary-foreground">
-                        <div className="flex gap-12">
-                            <img className="ml-2" src="" alt="PING"></img>
-                            <h2>Netonnet Flash Sales</h2>
-                        </div>
-                        <div className="ml-24">
-                            <h1>2024</h1>
-                        </div>
-                    </CardContent>
-                </Card>
+                <div className="space-y-4">
+                    <NewsCard
+                    title="Card 1"
+                    date="2024-05-17 19.00"
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                    adress="123 Street, City, Country"
+                    highlighted
+                    category="movie"
+                    />
+                    <NewsCard 
+                    title="Card 2"
+                    date="2024-05-17 20.00"
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                    adress="123 Street, City, Country"
+                    category="food"
+                    />
+                </div>
+            
             </div>
         </div>
     )
