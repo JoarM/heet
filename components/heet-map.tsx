@@ -22,6 +22,9 @@ import { CenterButton } from '@/components/center-button';
 import { Calendar } from '@/components/ui/calendar';
 import { Textarea } from '@/components/ui/textarea';
 import { ThemeSwapper } from '@/components/theme-swapper';
+import { LoadingButton } from './ui/loading-button';
+import { useFormState } from 'react-dom';
+import { createEvent } from '@/actions/event';
 
 interface Location {
   lng: number,
@@ -42,6 +45,7 @@ export function HeetMap({
     lng: -200
 
   })
+  const [form, createEventAction] = useFormState(createEvent, null)
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
@@ -65,9 +69,9 @@ export function HeetMap({
             <DrawerHeader>
               <DrawerTitle>Lägg till aktivitet</DrawerTitle>
             </DrawerHeader>
-            <div className='p-4'>
+            <form action={createEventAction} id='form' className='p-4'>
               <Label>Titel</Label>
-              <Input></Input>
+              <Input name='title'></Input>
               <Label>Kategori</Label>
               <div className='flex flex-wrap gap-2'>
                 <div>
@@ -104,7 +108,7 @@ export function HeetMap({
                 </div>
               </div>
               <Label>Beskrivning</Label>
-              <Textarea />
+              <Textarea name='description' />
               <Label>Börjar</Label>
               <div>
                 <Popover>
@@ -183,6 +187,7 @@ export function HeetMap({
                   <Button 
                   className='ml-1 px-2' 
                   variant={'outline'}
+                  type='button'
                   onClick={() => {
                     navigator.geolocation.getCurrentPosition((position) => {
                       if (position) {
@@ -198,13 +203,13 @@ export function HeetMap({
                     <MapPin className='size-4' />
                   </Button>
                 </div>
-            </div>
-            <DrawerFooter>
-              <Button>Submit</Button>
-              <DrawerClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter>
+                <input type="hidden" name='from' value={from.toString()} />
+                <input type="hidden" name='to' value={to.toString()} />
+                <LoadingButton className='w-full mt-6'>Submit</LoadingButton>
+                <DrawerClose asChild>
+                    <Button variant="outline" className='mt-2 w-full' type='button'>Cancel</Button>
+                </DrawerClose>
+            </form>
           </div>
         </DrawerContent>
       </Drawer>
