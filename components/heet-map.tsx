@@ -348,6 +348,7 @@ export function HeetMap({
                 <input type="hidden" name='from' value={from.toString()} />
                 <input type="hidden" name='to' value={to.toString()} />
                 <LoadingButton className='w-full mt-6'>Submit</LoadingButton>
+                {form?.message && (<span className='text-sm font-medium text-destructive mt-2 block'>{form.message}</span>)}
                 <DrawerClose asChild>
                     <Button variant="outline" className='mt-2 w-full' type='button'>Cancel</Button>
                 </DrawerClose>
