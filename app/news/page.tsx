@@ -29,7 +29,7 @@ export default function NewsPage() {
             <div className="relative flex flex-col items-end">
                 <motion.div
                     initial={{ width: 'auto' }}
-                    animate={{ width: isDropdownOpen ? '44vw' : 'auto' }}
+                    animate={{ width: isDropdownOpen ? '100%' : 'auto' }}
                     transition={{ duration: 0.3 }}
                     className="flex items-center z-10"
                 >
@@ -46,7 +46,8 @@ export default function NewsPage() {
                 </motion.div>
                 <motion.div
                     initial={{ width: 0, opacity: 0 }}
-                    animate={{ width: isDropdownOpen ? '44vw' : 0, opacity: isDropdownOpen ? 1 : 0 }}
+
+                    animate={{ width: isDropdownOpen ? '100%' : 0, opacity: isDropdownOpen ? 1 : 0 }}
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden absolute top-10 right-0 z-20"
                 >
