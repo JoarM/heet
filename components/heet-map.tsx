@@ -63,6 +63,12 @@ export function HeetMap({
     }
   }, [form])
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  function toggleDropdown() {
+    setIsDropdownOpen(!isDropdownOpen)
+  }
+
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
       {/* import from news */}
