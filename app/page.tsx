@@ -1,7 +1,8 @@
 import { getEvents } from "@/actions/event";
 import { CustomPin } from "@/components/custom-pin";
 import { HeetMap } from "@/components/heet-map";
-import { Button } from "@/components/ui/button";
+
+export const dynamic = 'force-dynamic'
 
 export default async function Page() {
   const events = await getEvents()

@@ -1,4 +1,7 @@
 import { boolean, datetime, float, int, mysqlTable, smallint, varchar } from "drizzle-orm/mysql-core";
+import { User } from "lucia";
+import { db } from ".";
+import { and, eq, gt, gte, lt } from "drizzle-orm";
 
 export const userTable = mysqlTable("user", {
     id: varchar("id", { length: 255 }).unique().notNull().primaryKey(),
@@ -8,7 +11,8 @@ export const userTable = mysqlTable("user", {
     phoneNumber: varchar("phoneNumber", { length: 32 }),
     country: varchar("country", { length: 128 }),
     displayName: varchar("display_name", { length: 128 }).notNull(),
-    hashedPassword: varchar("hashed_password", { length: 255 }).notNull()
+    hashedPassword: varchar("hashed_password", { length: 255 }).notNull(),
+    twoFactorSecret: varchar("two_factor_secret", { length: 255 })
 })
 
 export const sessionTable = mysqlTable("session", {
@@ -65,4 +69,15 @@ export const eventTable = mysqlTable("event", {
     activity: varchar("activity", { length: 64 }).notNull(),
     from: datetime("from", { mode: "date" }).notNull(),
     to: datetime("to", { mode: "date" }).notNull(),
+})
+
+export const confirmEmailTable = mysqlTable("confirm_email", {
+    id: int("id").primaryKey().autoincrement(),
+    code: varchar("code", { length: 8 }),
+    userId: varchar("user_id", {
+		length: 255
+	})
+    .notNull()
+    .references(() => userTable.id),
+    expiresAt: datetime("expires_at").notNull(),
 })

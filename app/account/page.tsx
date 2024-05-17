@@ -31,7 +31,7 @@ export default async function AccountPage() {
                 <div className="my-3">
                     <Link href="/account/settings" className="text-lg px-3 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors rounded-lg inline-flex items-center w-full"><Settings className="size-4 mr-2"/>Kontoinställningar</Link>
                     <Link href="/account/privacy" className="text-lg px-3 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors rounded-lg inline-flex items-center w-full"><Cookie className="size-4 mr-2"/>Integritetsinställningar</Link>
-                    <Link href="" className="text-lg px-3 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors rounded-lg inline-flex items-center w-full"><LockKeyhole className="size-4 mr-2"/>Kontots Säkerhet</Link>
+                    <Link href="/account/security" className="text-lg px-3 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors rounded-lg inline-flex items-center w-full"><LockKeyhole className="size-4 mr-2"/>Kontots Säkerhet</Link>
                     <Link href="" className="text-lg px-3 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors rounded-lg inline-flex items-center w-full"><PartyPopper className="size-4 mr-2"/>Mina Event</Link>
                     <form action={logout}>
                         <LoadingButton

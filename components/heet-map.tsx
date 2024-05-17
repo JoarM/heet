@@ -103,62 +103,49 @@ export function HeetMap({
                         className=" bg-secondary shadow-lg rounded-lg w-full"
                     >
                         <div className="px-4 py-4">
-                            <div className="flex space-x-4 mb-2 text-sm justify-evenly">
-                              <div className='w-full h-12 items center bg-background/70 rounded-xl flex justify-evenly'>
-                                <label className="inline-flex items-center transition-colors hover:bg-background/50 text-xl font-bold">
-                                    Markera alla
-                                    <input type="checkbox" className="ml-1 w-4 h-4"/>
-                                </label>
-                                <label className="inline-flex items-center transition-colors hover:bg-background/50 text-xl font-bold">
-                                Avmarkera alla 
-                                <input type="checkbox" className="ml-1 w-4 h-4" /> 
-                                </label>
-                              </div>
-                            </div>
-
-                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl accent-primary">
                               <Utensils className='mx-3'/>
                               Mat 
                               <input type="checkbox" className="mx-3 w-4 h-4" /> 
                             </label>
 
-                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl accent-primary">
                               <Beer className='mx-3'/>
                               Dryck 
                               <input type="checkbox" className="mx-3 w-4 h-4" /> 
                             </label>
 
-                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl accent-primary">
                               <Music className='mx-3'/>   
                               Musik  
                               <input type="checkbox" className="mx-3 w-4 h-4" /> 
                             </label>
 
-                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl accent-primary">
                               <Fish className='mx-3'/>   
                               Fiska  
                               <input type="checkbox" className="mx-3 w-4 h-4" /> 
                             </label>
 
-                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl accent-primary">
                               <Dumbbell className='mx-3'/>   
                               Gym  
                               <input type="checkbox" className="mx-3 w-4 h-4" /> 
                             </label>
 
-                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl accent-primary">
                               <Clapperboard className='mx-3'/>   
                               Film  
                               <input type="checkbox" className="mx-3 w-4 h-4" /> 
                             </label>
 
-                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl accent-primary">
                               <Drama className='mx-3'/>   
                               Teater  
                               <input type="checkbox" className="mx-3 w-4 h-4" /> 
                             </label>
 
-                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl accent-primary">
                               <Dices className='mx-3'/>   
                               Sällskapsspel  
                               <input type="checkbox" className="mx-3 w-4 h-4" /> 
