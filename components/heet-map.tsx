@@ -6,7 +6,7 @@ import { TimePicker } from "@/components/ui/time-picker";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {APIProvider, Map,} from '@vis.gl/react-google-maps';
 import { Button } from '@/components/ui/button';
-import {Plus, Clock, MapPin } from 'lucide-react';
+import {Plus, Clock, MapPin, ArrowDown, Filter, Utensils, Beer, Music, Fish, Dumbbell, Drama, Dices, Clapperboard} from 'lucide-react';
 import {
   Drawer,
   DrawerClose,
@@ -25,6 +25,7 @@ import { ThemeSwapper } from '@/components/theme-swapper';
 import { LoadingButton } from './ui/loading-button';
 import { useFormState } from 'react-dom';
 import { createEvent } from '@/actions/event';
+import { motion } from "framer-motion";
 
 interface Location {
   lng: number,
@@ -47,8 +48,113 @@ export function HeetMap({
   })
   const [form, createEventAction] = useFormState(createEvent, null)
 
+  // Jessie Dropdown Button
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(prevState => !prevState);
+  };
+
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
+      {/* import from news */}
+          <div className="relative flex flex-col items-end">
+                <motion.div
+                    initial={{ width: 'auto' }}
+                    animate={{ width: isDropdownOpen ? '100%' : 'auto' }}
+                    transition={{ duration: 0.3 }}
+                    className="flex items-center z-10"
+                >
+                    <Button onClick={toggleDropdown} className="rounded-full absolute right-2 top-2 hover:bg-primary" size="icon">
+                        <motion.div
+                            initial={{ rotate: 0 }}
+                            animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <Filter className="size-4"/>
+                        </motion.div>
+                    </Button>
+                </motion.div>
+                <motion.div
+                    initial={{ width: 0, opacity: 0 }}
+
+                    animate={{ width: isDropdownOpen ? '100%' : 0, opacity: isDropdownOpen ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden absolute top-12 right-0 z-20"
+                >
+                    <motion.div
+                        initial={{ height: 0 }}
+                        animate={{ height: isDropdownOpen ? 'auto' : 0 }}
+                        transition={{ duration: 0.3, delay: isDropdownOpen ? 0.3 : 0 }}
+                        className=" bg-secondary shadow-lg rounded-lg w-full"
+                    >
+                        <div className="px-4 py-4">
+                            <div className="flex space-x-4 mb-2 text-sm justify-evenly">
+                              <div className='w-full h-12 items center bg-background/70 rounded-xl flex justify-evenly'>
+                                <label className="inline-flex items-center transition-colors hover:bg-background/50 text-xl font-bold">
+                                    Markera alla
+                                    <input type="checkbox" className="ml-1 w-4 h-4"/>
+                                </label>
+                                <label className="inline-flex items-center transition-colors hover:bg-background/50 text-xl font-bold">
+                                Avmarkera alla 
+                                <input type="checkbox" className="ml-1 w-4 h-4" /> 
+                                </label>
+                              </div>
+                            </div>
+
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                              <Utensils className='mx-3'/>
+                              Mat 
+                              <input type="checkbox" className="mx-3 w-4 h-4" /> 
+                            </label>
+
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                              <Beer className='mx-3'/>
+                              Dryck 
+                              <input type="checkbox" className="mx-3 w-4 h-4" /> 
+                            </label>
+
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                              <Music className='mx-3'/>   
+                              Musik  
+                              <input type="checkbox" className="mx-3 w-4 h-4" /> 
+                            </label>
+
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                              <Fish className='mx-3'/>   
+                              Fiska  
+                              <input type="checkbox" className="mx-3 w-4 h-4" /> 
+                            </label>
+
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                              <Dumbbell className='mx-3'/>   
+                              Gym  
+                              <input type="checkbox" className="mx-3 w-4 h-4" /> 
+                            </label>
+
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                              <Clapperboard className='mx-3'/>   
+                              Film  
+                              <input type="checkbox" className="mx-3 w-4 h-4" /> 
+                            </label>
+
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                              <Drama className='mx-3'/>   
+                              Teater  
+                              <input type="checkbox" className="mx-3 w-4 h-4" /> 
+                            </label>
+
+                            <label className="inline-flex items-center transition-colors hover:bg-background/50 text-lg font-bold hover:rounded-xl rounded-xl">
+                              <Dices className='mx-3'/>   
+                              Sällskapsspel  
+                              <input type="checkbox" className="mx-3 w-4 h-4" /> 
+                            </label>
+
+                            
+                        </div>
+                    </motion.div>
+                </motion.div>
+        </div>
       <Map
         id='map'
         style={{ width: '100%', height: '100%' }}
@@ -60,9 +166,10 @@ export function HeetMap({
         {children}
       </Map>
       <CenterButton />
+      
       <Drawer>
         <DrawerTrigger asChild>
-          <Button size="icon" className='rounded-full bottom-20 absolute right-2 hover:bg-primary'><Plus /></Button>
+          <Button size="icon" className='rounded-full bottom-20 absolute right-2 hover:bg-primary'><Plus className='size-5' /></Button>
         </DrawerTrigger>
         <DrawerContent>
           <div className="mx-auto w-full max-w-sm">
