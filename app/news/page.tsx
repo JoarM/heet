@@ -26,33 +26,51 @@ export default function NewsPage() {
             <div>
                 <h3>Nyheter</h3>
             </div>
-            <div className="relative flex flex-col items-start">
+            <div className="relative flex flex-col items-end">
                 <motion.div
                     initial={{ width: 'auto' }}
-                    animate={{ width: isDropdownOpen ? '200px' : 'auto' }}
+                    animate={{ width: isDropdownOpen ? '44vw' : 'auto' }}
                     transition={{ duration: 0.3 }}
                     className="flex items-center z-10"
                 >
                     <Button onClick={toggleDropdown} className="flex items-center justify-between w-full">
                         <h1>Filter</h1>
-                        <ArrowDown className="size-4 ml-2" />
+                        <motion.div
+                            initial={{ rotate: 0 }}
+                            animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <ArrowDown className="size-4 ml-2" />
+                        </motion.div>
                     </Button>
                 </motion.div>
                 <motion.div
                     initial={{ width: 0, opacity: 0 }}
-                    animate={{ width: isDropdownOpen ? '200px' : 0, opacity: isDropdownOpen ? 1 : 0 }}
+                    animate={{ width: isDropdownOpen ? '44vw' : 0, opacity: isDropdownOpen ? 1 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="overflow-hidden absolute top-10 left-0 z-20"
+                    className="overflow-hidden absolute top-10 right-0 z-20"
                 >
                     <motion.div
                         initial={{ height: 0 }}
                         animate={{ height: isDropdownOpen ? 'auto' : 0 }}
                         transition={{ duration: 0.3, delay: isDropdownOpen ? 0.3 : 0 }}
-                        className=" bg-white shadow-lg rounded-lg py-2"
+                        className=" bg-secondary shadow-lg rounded-lg py-2 w-full"
                     >
-                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 1</a>
-                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 2</a>
-                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 3</a>
+                        <div className="px-4 py-2">
+                            <div className="flex space-x-4 mb-2 text-sm ">
+                                <label className="inline-flex items-center transition-colors hover:bg-background/50">
+                                    Option A <input type="checkbox" className="mr-1"/>
+                                </label>
+                                <label className="inline-flex items-center transition-colors hover:bg-background/50">
+                                    <input type="checkbox" className="mr-1" /> Option B
+                                </label>
+                                <label className="inline-flex items-center transition-colors hover:bg-background/50">
+                                    <input type="checkbox" className="mr-1" /> Option C
+                                </label>
+                            </div>
+                            <a href="#" className="block px-4 py-2 text-sm transition-colors hover:bg-background/50">Option 2</a>
+                            <a href="#" className="block px-4 py-2 text-sm transition-colors hover:bg-background/50">Option 3</a>
+                        </div>
                     </motion.div>
                 </motion.div>
             </div>
