@@ -26,6 +26,7 @@ import { LoadingButton } from './ui/loading-button';
 import { useFormState } from 'react-dom';
 import { createEvent } from '@/actions/event';
 import { motion } from "framer-motion";
+import { Directions } from './directions';
 
 interface Location {
   lng: number,
@@ -71,7 +72,6 @@ export function HeetMap({
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
-      {/* import from news */}
           <div className="relative flex flex-col items-end">
                 <motion.div
                     initial={{ width: 'auto' }}
@@ -173,7 +173,7 @@ export function HeetMap({
         id='map'
         style={{ width: '100%', height: '100%' }}
         defaultCenter={{ lat: 0, lng: 0 }}
-        defaultZoom={18}
+        defaultZoom={15}
         gestureHandling={'greedy'}
         disableDefaultUI
         onDblclick={(e) => {
@@ -187,9 +187,12 @@ export function HeetMap({
             setAddDrawerOpen(true)
           }
         }}
-        mapId={"edc7a72af363afe4"}>
-        {children}
-      </Map>
+        mapId={"edc7a72af363afe4"}
+        fullscreenControl={false}
+        >
+          <Directions />
+          {children}
+        </Map>
       <CenterButton />
       <Drawer open={addDrawerOpen} onOpenChange={setAddDrawerOpen}>
         <DrawerTrigger asChild>
@@ -315,6 +318,7 @@ export function HeetMap({
                 </Popover>
                 </div>
                 {form?.error?.to && (<span className='text-sm font-medium text-destructive mt-2 block'>{form.error.to}</span>)}
+                {form?.pastEnd && (<span className='text-sm font-medium text-destructive mt-2 block'>{form.pastEnd}</span>)}
 
                 <Label className='mt-4 block'>Plats</Label>
                 <div className='flex mt-2'>

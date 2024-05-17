@@ -36,9 +36,14 @@ export async function createEvent(_: any, formData: FormData) {
 
     if (!parse.success) {
         const error = parse.error.flatten().fieldErrors
-        console.log(error)
         return {
             error
+        }
+    }
+
+    if (parse.data.from > parse.data.to) {
+        return {
+            pastEnd: "Sätt en slut tid efter start tiden"
         }
     }
 

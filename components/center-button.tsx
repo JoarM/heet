@@ -15,7 +15,7 @@ export function CenterButton({
           if (map && position) {
             map.setCenter({ lat: position.coords.latitude, lng: position.coords.longitude })
           }
-        });
+        })
     }, [map])
 
     return (

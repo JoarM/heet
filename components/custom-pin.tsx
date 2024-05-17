@@ -4,6 +4,8 @@ import { AdvancedMarker, Pin } from "@vis.gl/react-google-maps"
 import { Beer, Clapperboard, Dices, Drama, Dumbbell, Fish, Music, Utensils } from "lucide-react"
 import { Drawer, DrawerTrigger, DrawerContent, DrawerTitle, DrawerDescription } from "./ui/drawer"
 import { Button } from "./ui/button"
+import { useDestinationStore } from "@/contexts/directions"
+import { useState } from "react"
 
 export function CustomPin({
     lat,
@@ -24,6 +26,8 @@ export function CustomPin({
 }) {
     let border = null;
     let icon = null;
+    const { updateDirections } = useDestinationStore()
+    const [drawerOpen, setDrawerOpen] = useState(false)
 
     if(category == "food"){
         border = "#935C1F"
@@ -59,7 +63,7 @@ export function CustomPin({
     }
 
     return (
-        <Drawer>
+        <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
                 <DrawerTrigger asChild>
                     <AdvancedMarker
                     position={{
@@ -83,7 +87,28 @@ export function CustomPin({
                     </div>
 
                     <DrawerDescription className="p-4 mb-2 border border-border w-max max-w-full rounded-xl">{description}</DrawerDescription>
-                    <Button className="w-full">Navigate</Button>
+                    <Button 
+                    className="w-full"
+                    onClick={() => {
+                        navigator.geolocation.getCurrentPosition((position) => {
+                            if (position) {
+                                updateDirections({
+                                    origin: {
+                                        lat: position.coords.latitude,
+                                        lng: position.coords.longitude
+                                    },
+                                    destination: {
+                                        lat,
+                                        lng
+                                    }
+                                })
+                                setDrawerOpen(false)
+                            }
+                        });
+                    }}
+                    >
+                        Hitta dit
+                    </Button>
                 </div>
             </DrawerContent>
         </Drawer>
