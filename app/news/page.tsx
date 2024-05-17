@@ -79,19 +79,19 @@ export default function NewsPage() {
                 <h1>Aktiva Event</h1>
                 <div className="space-y-4">
                     <NewsCard
-                    title="Card 1"
+                    title="GinaTricot Utförsäljning"
                     date="2024-05-17 19.00"
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                    adress="123 Street, City, Country"
+                    description="Vi ska flytta lager och har då utförsäljning. Kom hit för fantastiska priser"
+                    adress="Gina Tricot, Pallas Galleria, Lilla Brogatan 16, 503 30 Borås"
                     highlighted
-                    category="movie"
+                    category="drama"
                     />
                     <NewsCard 
-                    title="Card 2"
+                    title="Eton Flash Sale"
                     date="2024-05-17 20.00"
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                    adress="123 Street, City, Country"
-                    category="food"
+                    description="Vi har en flash sale idag med rabbater upp till 70%."
+                    adress="Eton Outlet Gånghester, Djupedalsvägen 3, 507 71 Gånghester"
+                    category="drama"
                     />
                 </div>
             
