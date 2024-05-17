@@ -34,13 +34,13 @@ export default function NewsPage() {
                     className="flex items-center z-10"
                 >
                     <Button onClick={toggleDropdown} className="flex items-center justify-between w-full">
-                        <h1>Filter</h1>
+                        <h1 className="mx-2">Filter</h1>
                         <motion.div
                             initial={{ rotate: 0 }}
                             animate={{ rotate: isDropdownOpen ? 180 : 0 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <ArrowDown className="size-4 ml-2" />
+                            <ArrowDown className="size-4 "/>
                         </motion.div>
                     </Button>
                 </motion.div>
