@@ -20,14 +20,6 @@ export async function RegisterAccount(_:any, formData: FormData) {
     const password = formData.get("password")
     const confirmPassword = formData.get("confirmpassword")
 
-    if (password != confirmPassword) {
-        return {
-            error: {
-                confirmPassword: "Lösenorden matchar inte"
-            }
-        }
-    }
-
     const parse = await signupValidator.safeParseAsync({
         username,
         email,
@@ -38,9 +30,14 @@ export async function RegisterAccount(_:any, formData: FormData) {
 
     if (!parse.success) {
         const error = parse.error.flatten().fieldErrors
-        console.log(error)
         return {
             error
+        }
+    }
+
+    if (password != confirmPassword) {
+        return {
+            confirmPassword: "Lösenorden matchar inte"
         }
     }
 
@@ -62,27 +59,30 @@ export async function RegisterAccount(_:any, formData: FormData) {
             country: parse.data.country,
             hashedPassword: passwordHash
         })
-
-        const session = await lucia.createSession(userId, {});
-        const sessionCookie = lucia.createSessionCookie(session.id);
-        cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-        return redirect("/");
-	} catch {
-		return {
-            error: {
-                message: "Ett oväntat fel uppstod"
+	} catch (err: any) {
+        if (err.code === "ER_DUP_ENTRY") {
+            return {
+                username: "Detta användarnamn används redan"
             }
         }
+		return {
+            message: "Ett oväntat fel uppstod"
+        }
 	}
+
+    const session = await lucia.createSession(userId, {});
+    const sessionCookie = lucia.createSessionCookie(session.id);
+    cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+    redirect("/");
 }
 
 export async function Login(_:any, formData: FormData) {
     const username = formData.get("username")
-    const email = formData.get("mail")
+    const password = formData.get("password")
 
     const parse = await loginValidator.safeParseAsync({
         username,
-        email
+        password
     })
 
     if (!parse.success) {
@@ -91,37 +91,37 @@ export async function Login(_:any, formData: FormData) {
             error
         }
     }
-    console.log("parse")
 
-    const existingUser = await db.select().from(userTable).where(eq(userTable.username, parse.data.username.toLocaleLowerCase()))
-    if (existingUser.length === 0) {
-        return {
-            error: {
+    try     {
+        const existingUser = await db.select().from(userTable).where(eq(userTable.username, parse.data.username.toLocaleLowerCase()))
+        if (existingUser.length === 0) {
+            return {
                 message: "Fel användarnamn eller lösenord"
             }
         }
-    }
-    console.log("")
 
-    const validPassword = await verify(existingUser[0].hashedPassword, parse.data.password, {
-		memoryCost: 19456,
-		timeCost: 2,
-		outputLen: 32,
-		parallelism: 1
-	});
+        const validPassword = await verify(existingUser[0].hashedPassword, parse.data.password, {
+            memoryCost: 19456,
+            timeCost: 2,
+            outputLen: 32,
+            parallelism: 1
+        });
 
-	if (!validPassword) {
-		return {
-			error: {
+        if (!validPassword) {
+            return {
                 message: "Fel användarnamn eller lösenord"
-            }
-		};
-	}
+            };
+        }
 
-    const session = await lucia.createSession(existingUser[0].id, {});
-	const sessionCookie = lucia.createSessionCookie(session.id);
-	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-	return redirect("/");
+        const session = await lucia.createSession(existingUser[0].id, {});
+        const sessionCookie = lucia.createSessionCookie(session.id);
+        cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+    } catch (err: any){
+        return {
+            message: "Ett oväntat fel uppstod"
+        }
+    }
+    return redirect("/");
 }
 
 export async function logout() {

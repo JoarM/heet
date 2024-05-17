@@ -57,9 +57,7 @@ export async function createEvent(_: any, formData: FormData) {
         })
     } catch (err: any) {
         return {
-            error: {
-                message: "Ett oväntat fel uppstod"
-            }
+            message: "Ett oväntat fel uppstod"
         }
     }
 }
@@ -69,9 +67,7 @@ export async function deleteEvent(id: number) {
         await db.delete(eventTable).where(eq(eventTable.id, id))
     } catch (err: any) {
         return {
-            error: {
-                message: "Ett oväntat fel uppstod"
-            }
+            message: "Ett oväntat fel uppstod"
         }
     }
 }
