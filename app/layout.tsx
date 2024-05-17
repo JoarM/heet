@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google"
 import "./globals.css";
-import { MapPin, Newspaper, UserRound } from "lucide-react";
 
 import { cn } from "@/lib/utils"
-import Link from "next/link";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Navbar } from "@/components/navbar";
  
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -42,11 +41,7 @@ export default function RootLayout({
                 {children}
               </main>
               <nav className="bg-secondary rounded-t-md overflow-hidden absolute bottom-0 left-0 right-0 h-">
-                <div className="flex items-center justify-evenly flex-wrap m-5">
-                  <Link href={"/news"}><Newspaper className="size-7" /></Link>
-                  <Link href={"/"}><MapPin className="size-7" /></Link>
-                  <Link href={"/account"}><UserRound className="size-7"/></Link>
-                </div>
+                <Navbar />
               </nav>
             </div>
           </ThemeProvider>
