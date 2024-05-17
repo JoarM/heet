@@ -4,8 +4,8 @@ import { validateRequest } from "@/data/user"
 import { db } from "@/db"
 import { eventTable } from "@/db/schema"
 import { newEventValidator } from "@/lib/validations"
-import { error } from "console"
 import { eq, inArray } from "drizzle-orm"
+import { revalidatePath } from "next/cache"
 
 export async function createEvent(_: any, formData: FormData) {
     const title = formData.get("title")
@@ -20,9 +20,7 @@ export async function createEvent(_: any, formData: FormData) {
 
     if (!user) {
         return {
-            error: {
-                message: "Logga in för att publicera ett event"
-            }
+            message: "Logga in för att publicera ett event"
         }
     }
 
@@ -38,6 +36,7 @@ export async function createEvent(_: any, formData: FormData) {
 
     if (!parse.success) {
         const error = parse.error.flatten().fieldErrors
+        console.log(error)
         return {
             error
         }
@@ -55,6 +54,7 @@ export async function createEvent(_: any, formData: FormData) {
             latitude: lat,
             longitude: lng
         })
+        revalidatePath("/")
     } catch (err: any) {
         return {
             message: "Ett oväntat fel uppstod"
@@ -77,7 +77,9 @@ export async function getEvents(filters?: {
 }) {
     try {
         const events = await db.select().from(eventTable).where(filters?.activity && inArray(eventTable.activity, filters.activity))
-        return events
+        return {
+            data: events
+        }
     } catch (err: any) {
         return {
             error: "Myslyckades med att ladda event"
