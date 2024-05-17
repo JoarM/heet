@@ -1,23 +1,46 @@
 import { UserRound, Settings, Cookie, LockKeyhole, PartyPopper, Star} from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import { validateRequest } from "@/data/user";
+import { redirect } from "next/navigation";
+import { logout } from "@/actions/user";
+import { LoadingButton } from "@/components/ui/loading-button";
 
 export default async function AccountPage() {
+    const { user } = await validateRequest()
+
+    if (!user) {
+        redirect("/login")
+    }
+
     return (
         <div className="p-3">
             <header className="text-2xl font-bold">Konto</header>
             <div className="mt-4">
-                <UserRound className="size-20 p-3 bg-secondary rounded-md inline-block"/>
-                <div className="inline-block mx-5">
-                    <header className="w-full text-2xl">Felix Johansson</header>
-                    <p className="text-muted-foreground">@feluxfelixus</p>
+                <div className="flex gap-2 items-center">
+                    <span className="bg-secondary size-16 rounded-lg inline-flex items-center justify-center">
+                        <UserRound className="size-8"/>
+                    </span>
+                    <div>
+                        <header className="text-lg">{user.displayName}</header>
+                        <p className="text-muted-foreground text-sm font-medium">@{user.username}</p>
+                    </div>
                 </div>
+                
                 <Separator className="my-4"/>
                 <div className="my-3">
-                    <Link href="/account/settings" className="block text-xl hover:underline underline-offset-4"><Settings className="inline m-2"/>Kontoinställningar</Link>
-                    <Link href="/account/privacy" className="block text-xl hover:underline underline-offset-4"><Cookie className="inline m-2"/>Integritetsinställningar</Link>
-                    <Link href="" className="block text-xl hover:underline underline-offset-4"><LockKeyhole className="inline m-2"/>Kontots Säkerhet</Link>
-                    <Link href="" className="block text-xl hover:underline underline-offset-4"><PartyPopper className="inline m-2"/>Mina Event</Link>
+                    <Link href="/account/settings" className="text-lg px-3 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors rounded-lg inline-flex items-center w-full"><Settings className="size-4 mr-2"/>Kontoinställningar</Link>
+                    <Link href="/account/privacy" className="text-lg px-3 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors rounded-lg inline-flex items-center w-full"><Cookie className="size-4 mr-2"/>Integritetsinställningar</Link>
+                    <Link href="" className="text-lg px-3 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors rounded-lg inline-flex items-center w-full"><LockKeyhole className="size-4 mr-2"/>Kontots Säkerhet</Link>
+                    <Link href="" className="text-lg px-3 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors rounded-lg inline-flex items-center w-full"><PartyPopper className="size-4 mr-2"/>Mina Event</Link>
+                    <form action={logout}>
+                        <LoadingButton
+                        variant="destructive"
+                        className="w-full"
+                        >
+                            Logout
+                        </LoadingButton>
+                    </form>
                 </div>
                 <Separator className="my-4"/>
                 <div className="flex">
