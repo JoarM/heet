@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Label } from "@/components/ui/label"
 import { TimePicker } from "@/components/ui/time-picker";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -39,13 +39,28 @@ export function HeetMap({
   }>) {
   const [from, setFrom] = useState(new Date());
   const [to, setTo] = useState(new Date());
+  const [addDrawerOpen, setAddDrawerOpen] = useState(false)
   const [location, setLocation] = useState<Location>({
     label: "",
     lat: -200,
     lng: -200
-
   })
   const [form, createEventAction] = useFormState(createEvent, null)
+  const formRef = useRef<HTMLFormElement>(null)
+
+  useEffect(() => {
+    if (!form) {
+      formRef.current?.reset()
+      setAddDrawerOpen(false)
+      setFrom(new Date())
+      setTo(new Date())
+      setLocation({
+        label: "",
+        lat: -200,
+        lng: -200
+      })
+    }
+  }, [form])
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
@@ -56,11 +71,22 @@ export function HeetMap({
         defaultZoom={18}
         gestureHandling={'greedy'}
         disableDefaultUI
+        onDblclick={(e) => {
+          e.stop()
+          if (e.detail.latLng?.lat && e.detail.latLng.lng) {
+            setLocation({
+              label: "Vald plats",
+              lat: e.detail.latLng?.lat,
+              lng: e.detail.latLng?.lng
+            })
+            setAddDrawerOpen(true)
+          }
+        }}
         mapId={"edc7a72af363afe4"}>
         {children}
       </Map>
       <CenterButton />
-      <Drawer>
+      <Drawer open={addDrawerOpen} onOpenChange={setAddDrawerOpen}>
         <DrawerTrigger asChild>
           <Button size="icon" className='rounded-full bottom-20 absolute right-2 hover:bg-primary'><Plus /></Button>
         </DrawerTrigger>
@@ -70,47 +96,50 @@ export function HeetMap({
               <DrawerTitle>Lägg till aktivitet</DrawerTitle>
             </DrawerHeader>
             <form action={createEventAction} id='form' className='p-4'>
-              <Label>Titel</Label>
-              <Input name='title'></Input>
-              <Label>Kategori</Label>
-              <div className='flex flex-wrap gap-2'>
+              <Label className='block mt-4'>Titel</Label>
+              <Input name='title' className='block mt-2'></Input>
+              {form?.error?.title && (<span className='text-sm font-medium text-destructive mt-2'>{form.error.title}</span>)}
+              <Label className='block mt-4'>Kategori</Label>
+              <div className='flex flex-wrap gap-2 mt-2'>
                 <div>
                   <input className='sr-only peer' id='food' type="radio" name='activity' value="food" />
-                  <label htmlFor='food' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary'>Mat</label>
+                  <label htmlFor='food' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary peer-checked:text-primary-foreground transition-colors hover:bg-secondary/50'>Mat</label>
                 </div>
                 <div>
                   <input className='sr-only peer' id='bar' type="radio" name='activity' value="bar" />
-                  <label htmlFor='bar' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary'>Bar</label>
+                  <label htmlFor='bar' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary peer-checked:text-primary-foreground transition-colors hover:bg-secondary/50'>Bar</label>
                 </div>
                 <div>
                   <input className='sr-only peer' id='music' type="radio" name='activity' value="music" />
-                  <label htmlFor='music' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary'>Musik</label>
+                  <label htmlFor='music' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary peer-checked:text-primary-foreground transition-colors hover:bg-secondary/50'>Musik</label>
                 </div>
                 <div>
                   <input className='sr-only peer' id='gym' type="radio" name='activity' value="gym" />
-                  <label htmlFor='gym' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary'>Gymma</label>
+                  <label htmlFor='gym' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary peer-checked:text-primary-foreground transition-colors hover:bg-secondary/50'>Gymma</label>
                 </div>
                 <div>
                   <input className='sr-only peer' id='fishing' type="radio" name='activity' value="fishing" />
-                  <label htmlFor='fishing' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary'>Fiska</label>
+                  <label htmlFor='fishing' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary peer-checked:text-primary-foreground transition-colors hover:bg-secondary/50'>Fiska</label>
                 </div>
                 <div>
                   <input className='sr-only peer' id='drama' type="radio" name='activity' value="drama" />
-                  <label htmlFor='drama' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary'>Teater</label>
+                  <label htmlFor='drama' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary peer-checked:text-primary-foreground transition-colors hover:bg-secondary/50'>Teater</label>
                 </div>
                 <div>
                   <input className='sr-only peer' id='movie' type="radio" name='activity' value="movie" />
-                  <label htmlFor='movie' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary'>Bio</label>
+                  <label htmlFor='movie' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary peer-checked:text-primary-foreground transition-colors hover:bg-secondary/50'>Bio</label>
                 </div>
                 <div>
                   <input className='sr-only peer' id='boardgames' type="radio" name='activity' value="boardgames" />
-                  <label htmlFor='boardgames' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary'>Sällskapsspel</label>
+                  <label htmlFor='boardgames' className='text-sm px-2 py-1 border border-border rounded-lg peer-checked:bg-primary peer-checked:text-primary-foreground transition-colors hover:bg-secondary/50'>Sällskapsspel</label>
                 </div>
               </div>
-              <Label>Beskrivning</Label>
-              <Textarea name='description' />
-              <Label>Börjar</Label>
-              <div>
+              {form?.error?.activity && (<span className='text-sm font-medium text-destructive mt-2 block'>{form.error.activity}</span>)}
+              <Label className='block mt-4'>Beskrivning</Label>
+              <Textarea name='description' className='mt-2 block resize-none' />
+              {form?.error?.description && (<span className='text-sm font-medium text-destructive mt-2 block'>{form.error.description}</span>)}
+              <Label className='block mt-4'>Börjar</Label>
+              <div className='mt-2'>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -144,8 +173,9 @@ export function HeetMap({
                   </PopoverContent>
                 </Popover>
                 </div>
-                <Label>Slutar</Label>
-              <div>
+                {form?.error?.from && (<span className='text-sm font-medium text-destructive mt-2 block'>{form.error.from}</span>)}
+                <Label className='mt-4 block'>Slutar</Label>
+              <div className='mt-2'>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -179,8 +209,10 @@ export function HeetMap({
                   </PopoverContent>
                 </Popover>
                 </div>
-                <Label>Plats</Label>
-                <div className='flex'>
+                {form?.error?.to && (<span className='text-sm font-medium text-destructive mt-2 block'>{form.error.to}</span>)}
+
+                <Label className='mt-4 block'>Plats</Label>
+                <div className='flex mt-2'>
                   <Input value={location.label} />
                   <input type="hidden" name='lat' value={location.lat} />
                   <input type="hidden" name='lng' value={location.lng} />
@@ -203,6 +235,7 @@ export function HeetMap({
                     <MapPin className='size-4' />
                   </Button>
                 </div>
+                {(form?.error?.lat || form?.error?.lng) && (<span className='text-sm font-medium text-destructive mt-2 block'>Dubbel klicka på kartan eller klicka på ikonen till höger</span>)}
                 <input type="hidden" name='from' value={from.toString()} />
                 <input type="hidden" name='to' value={to.toString()} />
                 <LoadingButton className='w-full mt-6'>Submit</LoadingButton>

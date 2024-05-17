@@ -12,7 +12,8 @@ export default async function Page() {
         <>
           {events.data.map((event) => {
             return (
-              <CustomPin 
+              <CustomPin
+              key={event.id} 
               lat={event.latitude}
               lng={event.longitude}
               title={event.title}
@@ -26,15 +27,6 @@ export default async function Page() {
         </>
         
       )}
-      <CustomPin 
-      lat={57.72}
-      lng={12.943874899999987}
-      title="Eating MCdonalds"
-      category="food"
-      startTime="00:00"
-      endTime="02:00"
-      description="bilgun is buying Mcdownalds and we eat very good yes yes"
-      />
     </HeetMap>
   )
 }
