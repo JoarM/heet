@@ -2,10 +2,6 @@ import { db } from "@/db";
 import { sessionTable, userTable } from "@/db/schema";
 import { DrizzleMySQLAdapter } from "@lucia-auth/adapter-drizzle";
 import { Lucia } from "lucia";
-import { webcrypto } from "node:crypto";
-
-globalThis.crypto = webcrypto as Crypto;
-
 
 const adapter = new DrizzleMySQLAdapter(db, sessionTable, userTable);
 
@@ -25,7 +21,8 @@ export const lucia = new Lucia(adapter, {
             email: attributes.email,
             phoneNumber: attributes.phoneNumber,
             country: attributes.country,
-            emailConfirmed: attributes.emailConfirmed
+            emailConfirmed: attributes.emailConfirmed,
+            displayName: attributes.displayName
 		};
 	}
 });
@@ -40,6 +37,7 @@ declare module "lucia" {
             phoneNumber: string | null;
             emailConfirmed: boolean;
             country: string;
+            displayName: string;
 		};
 	}
 }

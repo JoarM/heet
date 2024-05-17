@@ -19,7 +19,7 @@ export function CenterButton({
 
     return (
         <Button
-        className={cn('absolute rounded-full bottom-1 left-1.5 hover:bg-secondary', className)} 
+        className={cn('bottom-20 absolute rounded-full left-1.5 hover:bg-secondary', className)} 
         variant="secondary"
         size="icon"
         onClick={() => {

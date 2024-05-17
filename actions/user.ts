@@ -1,3 +1,5 @@
+"use server"
+
 import { loginValidator, signupValidator } from "@/lib/validations"
 import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
@@ -8,24 +10,35 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { verify } from "@node-rs/argon2";
+import { validateRequest } from "@/data/user";
 
 export async function RegisterAccount(_:any, formData: FormData) {
     const username = formData.get("username")
-    const email = formData.get("email")
-    const dislayName = formData.get("displayName")
+    const email = formData.get("mail")
+    const displayName = formData.get("displayName")
     const country = formData.get("country")
     const password = formData.get("password")
+    const confirmPassword = formData.get("confirmpassword")
+
+    if (password != confirmPassword) {
+        return {
+            error: {
+                confirmPassword: "Lösenorden matchar inte"
+            }
+        }
+    }
 
     const parse = await signupValidator.safeParseAsync({
         username,
         email,
-        dislayName,
+        displayName,
         country,
         password
     })
 
     if (!parse.success) {
         const error = parse.error.flatten().fieldErrors
+        console.log(error)
         return {
             error
         }
@@ -43,7 +56,7 @@ export async function RegisterAccount(_:any, formData: FormData) {
 	try {
 		await db.insert(userTable).values({
             id: userId,
-            username: parse.data.username,
+            username: parse.data.username.toLocaleLowerCase(),
             email: parse.data.email,
             displayName: parse.data.displayName,
             country: parse.data.country,
@@ -65,7 +78,7 @@ export async function RegisterAccount(_:any, formData: FormData) {
 
 export async function Login(_:any, formData: FormData) {
     const username = formData.get("username")
-    const email = formData.get("email")
+    const email = formData.get("mail")
 
     const parse = await loginValidator.safeParseAsync({
         username,
@@ -78,8 +91,9 @@ export async function Login(_:any, formData: FormData) {
             error
         }
     }
+    console.log("parse")
 
-    const existingUser = await db.select().from(userTable).where(eq(userTable.username, parse.data.username))
+    const existingUser = await db.select().from(userTable).where(eq(userTable.username, parse.data.username.toLocaleLowerCase()))
     if (existingUser.length === 0) {
         return {
             error: {
@@ -87,6 +101,7 @@ export async function Login(_:any, formData: FormData) {
             }
         }
     }
+    console.log("")
 
     const validPassword = await verify(existingUser[0].hashedPassword, parse.data.password, {
 		memoryCost: 19456,
@@ -107,4 +122,19 @@ export async function Login(_:any, formData: FormData) {
 	const sessionCookie = lucia.createSessionCookie(session.id);
 	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 	return redirect("/");
+}
+
+export async function logout() {
+	const { session } = await validateRequest();
+	if (!session) {
+		return {
+			error: "Unauthorized"
+		};
+	}
+
+	await lucia.invalidateSession(session.id);
+
+	const sessionCookie = lucia.createBlankSessionCookie();
+	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+	return redirect("/login");
 }

@@ -1,8 +1,10 @@
 "use server"
 
+import { validateRequest } from "@/data/user"
 import { db } from "@/db"
 import { eventTable } from "@/db/schema"
 import { newEventValidator } from "@/lib/validations"
+import { error } from "console"
 import { eq, inArray } from "drizzle-orm"
 
 export async function createEvent(_: any, formData: FormData) {
@@ -14,7 +16,15 @@ export async function createEvent(_: any, formData: FormData) {
     const lat = Number(formData.get("lat")?.toString() ?? "")
     const lng = Number(formData.get("lng")?.toString() ?? "")
 
-    //Add authentication
+    const { user } = await validateRequest()
+
+    if (!user) {
+        return {
+            error: {
+                message: "Logga in för att publicera ett event"
+            }
+        }
+    }
 
     const parse = await newEventValidator.safeParseAsync({
         title: title,
@@ -41,8 +51,7 @@ export async function createEvent(_: any, formData: FormData) {
             activity: parse.data.activity,
             from: parse.data.from,
             to: parse.data.to,
-            //Add proper userid
-            host_id: "1",
+            host_id: user.id,
             latitude: lat,
             longitude: lng
         })
@@ -72,7 +81,9 @@ export async function getEvents(filters?: {
 }) {
     try {
         const events = await db.select().from(eventTable).where(filters?.activity && inArray(eventTable.activity, filters.activity))
-        return events
+        return {
+            data: events
+        }
     } catch (err: any) {
         return {
             error: "Myslyckades med att ladda event"
